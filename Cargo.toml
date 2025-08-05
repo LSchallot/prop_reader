@@ -8,5 +8,5 @@ license = "MIT"
 repository = "https://github.com/LSchallot/prop_reader"
 readme = "README.md"
 keywords = ["application", "properties", "yaml", "json"]
-categories = ["config", "parser", "configuration", "properties"]
+categories = ["config"]
 rust-version = "1.88"
