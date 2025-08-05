@@ -1,5 +1,5 @@
-# PropReader testing
-PropReader is a small parsing library for properties files.  
+# prop_reader
+prop_reader is a small parsing library for properties files.  
 
 ## Examples
 prop_reader can be used to parse properties files that are delimited with either ':' or '='.  It also has built-in support for ignoring full line comments as well as in-line comments.
