@@ -1,0 +1,12 @@
+[package]
+name = "prop_reader"
+version = "0.1.0"
+authors = ["Luther Schallot <l.schallot@gmail.com>"]
+edition = "2024"
+description = "Library for reading yaml based property files."
+license = "MIT"
+repository = "https://github.com/LSchallot/prop_reader"
+readme = "README.md"
+keywords = ["application", "properties", "yaml", "json"]
+categories = ["config", "parser", "configuration", "properties"]
+rust-version = "1.88"
