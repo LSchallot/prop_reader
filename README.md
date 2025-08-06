@@ -17,7 +17,7 @@ Add the following to your `cargo.toml`:
 
 ```
 [dependencies]
-prop_reader = "0.1.0"
+prop_reader = "0.1.1"
 ```
 From there, it can be used as simply as:
 ```
