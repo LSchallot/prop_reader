@@ -6,7 +6,7 @@ const SHORT_FILENAME: &str = "./tests/small_valid.properties";
 const LARGE_FILENAME: &str = "./tests/large.properties";
 
 #[test]
-fn new_test() {
+fn exists() {
     let properties: PropReader = PropReader::new(VALID_FILENAME);
     let test1 = properties.exists("equals.no.quotes");
     let test2 = properties.exists("fake.property");
