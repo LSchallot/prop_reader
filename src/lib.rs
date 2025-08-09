@@ -1,7 +1,7 @@
 #![warn(clippy::all)]
 #![warn(clippy::cargo)] 
 
-use std::{collections::HashMap, fs::read_to_string};
+use std::{collections::HashMap, fs::read_to_string, path::Path, ffi::OsStr};
 mod parser;
 use parser::Parser;
 
@@ -12,8 +12,17 @@ pub struct PropReader {
 
 impl PropReader {
     pub fn new(filename: &str) -> Self {
-        let contents = read_to_string(filename).expect("Could not find properties file.");
-        Self { properties: Parser::parse(contents) }
+        match get_filetype_from_filename(filename) {
+            None => panic!("File not found"),
+            Some("xml") => {
+                let contents = read_to_string(filename).expect("Could not find properties.file.");
+                Self { properties: Parser::parse_xml(contents) }
+            },
+            Some(_) => {
+                let contents = read_to_string(filename).expect("Could not find properties file.");
+                Self { properties: Parser::parse(contents) }
+            }
+        }
     }
 
     /// Checks if a property with the given key exists
@@ -54,4 +63,10 @@ impl Default for PropReader {
     fn default() -> Self {
         Self::new("application.properties")
     }
+}
+
+fn get_filetype_from_filename(filename: &str) -> Option<&str> {
+    Path::new(filename)
+        .extension()
+        .and_then(OsStr::to_str)
 }

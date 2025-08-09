@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <entry key="test1">test1</entry>
+  <entry key="test2">test with space</entry>
+  <entry key="test3">test outside comment</entry>
+  <!-- 
+  <entry key="test3">test inside comment</entry>
+  -->
+</properties>

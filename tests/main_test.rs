@@ -1,9 +1,10 @@
 use prop_reader::PropReader;
 
-const VALID_FILENAME: &str = "./tests/valid.properties";
-const INVALID_FILENAME: &str = "./tests/invalid.properties";
-const SHORT_FILENAME: &str = "./tests/small_valid.properties";
-const LARGE_FILENAME: &str = "./tests/large.properties";
+const VALID_FILENAME: &str = "./tests/files/valid.properties";
+const INVALID_FILENAME: &str = "./tests/files/invalid.properties";
+const SHORT_FILENAME: &str = "./tests/files/small_valid.properties";
+const LARGE_FILENAME: &str = "./tests/files/large.properties";
+const XML_FILE: &str = "./tests/files/properties.xml";
 
 #[test]
 fn exists() {
@@ -84,6 +85,17 @@ fn large_file_load() {
     let properties: PropReader = PropReader::new(LARGE_FILENAME);
     let test = properties.get("key524745");
     assert_eq!(test, "value524745");
+}
+
+#[test]
+fn xml_props() {
+    let properties: PropReader = PropReader::new(XML_FILE);
+    let test = properties.get("test1");
+    let test2 = properties.get("test2");
+    let test3 = properties.get("test3");
+    assert_eq!(test, "test1");
+    assert_eq!(test2, "test with space");
+    assert_eq!(test3, "test outside comment");
 }
 
 #[test]

@@ -28,4 +28,35 @@ impl Parser {
         }
         hashed
     }
+
+    pub fn parse_xml(contents: String) -> HashMap<String, String> {
+        let mut in_comments = false;
+        let mut hashed: HashMap<String, String> = HashMap::new();
+        for line in contents.lines() {
+            // Perform checks for multi-line comments, empty lines, and lines that won't matter.
+            if in_comments && line.contains("-->") {
+                in_comments = false;
+                continue;
+            } else if line.contains("<!--") {
+                in_comments = true;
+                continue;
+            } else if line.is_empty() || !line.trim().starts_with("<entry") || in_comments {
+                continue;
+            }
+
+            // First we need to extract the key
+            let mut key = line.split("key=\"").last().unwrap().trim();
+            key = key.split("\">").next().unwrap().trim();
+
+            // Now extract the value
+            let mut value = line.split("</entry>").next().unwrap().trim();
+            value = value.split(">").last().unwrap().trim();
+
+            if let Some(stripped_key) = key.strip_prefix('"').and_then(|key| key.strip_suffix('"')) {
+                key = stripped_key;
+            }
+            hashed.insert(key.to_string(), value.to_string());
+        }
+        hashed
+    }
 }
